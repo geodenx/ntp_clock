@@ -1,0 +1,118 @@
+2002-01-05  OKAZAKI Atsuya  <atsuya@mac.com>
+
+	* ntp0067.asm:
+	 tuginotuki: 1月に年が代わるように変更
+	 CCP1 = 62500-1
+	
+2001-11-21  OKAZAKI Atsuya  <atsuya@mac.com>
+
+	* ntp0066.asm:
+	utility-mode
+	200以上255未満のセグメント入力のBug fix
+
+2001-11-10  YOKOBORI Masayuki  <miyabi@uranus.interq.or.jp>
+
+	* ntp0065.asm
+	i) 毎正時に校正要求。
+	ii) LED の点滅を抑制
+	    RB7 のみ1sec 間隔で100msec点灯
+	iii) 廃止されたJST の後ろを変更
+	    ・校正時
+               	[ ! ]マーク（約10sec）表示
+	    ・Stealth-mode中に校正された時
+                1/10 sec を表示
+	    ・校正失敗時
+                [ ? ]マークを表示（次に校正されるまで）
+
+            ・[ ? ]マークがでているときはJST ではない可能性大と言うこと。
+            ・[ ! ]マークがでているときはJST に非常に近いと言うこと。
+
+2001-11-07  OKAZAKI Atsuya  <atsuya@mac.com>
+
+	* ntp0064e2.asm:
+
+	hh:mm:ss JST?
+
+	と?に秒の少数部上位8bit/255 * 10を表示していたが、廃止。
+	comment out debuggerは使ってください。
+
+2001-11-06  OKAZAKI Atsuya  <atsuya@mac.com>
+
+	* ntp0064e.asm:
+	
+	utility_outにおいて
+	bcf    irp; Bank0,1
+	とすることによってstart0で再起動したときにntp_ipに間接アドレスでき
+	る。NTP Server address Bug解決
+
+2001-11-04  OKAZAKI Atsuya  <atsuya@mac.com>
+
+	* ntp0064m.asm:
+	utility-mode手直し
+	main routineの中のSw関しLoopをPage移動
+
+	方形波出力
+	RB4　0.1sec pps
+	RB5　T=0.2sec
+	RB6　T=1sec
+	RB7　T=2sec
+
+	utility-modeのNTP Server Addressが保存されるが反映されない。
+	2回以上再起動すると有効になる。
+	
+2001-11-03  OKAZAKI Atsuya  <atsuya@mac.com>
+
+	* ntp0063e2.asm: 
+            ping 耐性強化
+	    Bank2に受信Datagramを入れないでBank3へ 114ByteまでOK
+
+	* ChangLog:
+	以下、今までのSource Codeに書いていたChangeLog
+
+	* Version 0.0.6.2:
+		utility-mode終了後再起動, 起動直後ARP送信
+		
+	* Version 0.0.6.1:
+		utility-mode実装
+
+	* Version 0.0.6.0:
+		NTP Server IP AddressをEEPROMから読み込む
+
+	* Version 0.0.5.9:
+		stealth-mode 24/12Hと統合 (utility-mode時にstealth-modeへ)
+
+	* Version 0.0.5.7:
+		utility-mode
+
+	* Version 0.0.5.6:
+		NTP Timestamp 小数部上位8bit取得 -> sb1dd
+
+	* Version 0.0.5.5:
+		clean start routine
+
+	* Version 0.0.5.4:
+		move clock ram in Bank2
+
+	* Version 0.0.5.0:
+		combine clock module
+
+	* Version 0.0.4.9:
+		strip
+
+	* Version 0.0.4.5:
+		NTP client
+
+	* Version 0.0.4.2:
+		ARP client for NTP Server
+
+	* Version 0.0.3.8:
+		Receive NTP packet
+
+	* Version 0.0.3.6:
+		Transmit NTP packet
+
+	* Version 0.0.3.0:
+		Ping Client (PICNIC v12.asmから不要部分削除)
+
+	* Version 0.0.1:
+		PICNIC Version 1.2.0.0へのコメント入れ
